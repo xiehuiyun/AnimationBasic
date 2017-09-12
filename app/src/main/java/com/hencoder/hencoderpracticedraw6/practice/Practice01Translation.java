@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.hencoder.hencoderpracticedraw6.R;
+import com.hencoder.hencoderpracticedraw6.Utils;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static com.hencoder.hencoderpracticedraw6.Utils.dpToPixel;
@@ -21,6 +22,9 @@ import static com.hencoder.hencoderpracticedraw6.Utils.dpToPixel;
 public class Practice01Translation extends RelativeLayout {
     Button animateBt;
     ImageView imageView;
+    private int animationType = 0;
+    //低版本只能完成前4个
+    int translationStateCount = SDK_INT > Build.VERSION_CODES.LOLLIPOP ? 6 : 4;
 
     public Practice01Translation(Context context) {
         super(context);
@@ -46,15 +50,40 @@ public class Practice01Translation extends RelativeLayout {
         }
 
         animateBt.setOnClickListener(new OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+                switch (animationType) {
+                    case 0:
+                        imageView.animate().translationX(Utils.dpToPixel(100));
+                        break;
+                    case 1:
+                        imageView.animate().translationX(0);
+                        break;
+                    case 2:
+                        imageView.animate().translationY(Utils.dpToPixel(50));
+                        break;
+                    case 3:
+                        imageView.animate().translationY(0);
+                        break;
+                    case 4:
+                        imageView.animate().translationZ(Utils.dpToPixel(15));
+                        break;
+                    case 5:
+                        imageView.animate().translationZ(0);
+                        break;
+                }
+                animationType++;
+                if (animationType == translationStateCount) {
+                    animationType = 0;
+                }
             }
         });
     }
 
     /**
-     * 为音乐图标设置三角形的 Outline。
+     * 为音乐图标设置三角形的 Outline。设置阴影
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     class MusicOutlineProvider extends ViewOutlineProvider {
