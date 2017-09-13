@@ -11,7 +11,8 @@ import android.widget.RelativeLayout;
 import com.hencoder.hencoderpracticedraw6.R;
 
 public class Practice08ObjectAnimatorLayout extends RelativeLayout {
-    Practice08ObjectAnimatorView view;
+//    Practice08ObjectAnimatorView view;
+    ProgressView view;
     Button animateBt;
 
     public Practice08ObjectAnimatorLayout(Context context) {
@@ -30,7 +31,8 @@ public class Practice08ObjectAnimatorLayout extends RelativeLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        view = (Practice08ObjectAnimatorView) findViewById(R.id.objectAnimatorView);
+//        view = (Practice08ObjectAnimatorView) findViewById(R.id.objectAnimatorView);
+        view = (ProgressView) findViewById(R.id.objectAnimatorView);
         animateBt = (Button) findViewById(R.id.animateBt);
 
         animateBt.setOnClickListener(new OnClickListener() {
